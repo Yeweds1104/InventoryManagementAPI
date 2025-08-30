@@ -18,3 +18,13 @@ class Item(models.Model):
     
     def __str__(self):
         return f"{self.name} ({self.quantity} in stock)"
+
+class ItemsLog(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='logs')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    old_quantity = models.PositiveIntegerField()
+    new_quantity = models.PositiveIntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Change for {self.item.name} by {self.user} on {self.timestamp}"

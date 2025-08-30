@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, viewSets
+from rest_framework import generics, permissions, viewsets
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -31,7 +31,7 @@ class MeView(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
-class UserViewSet(viewSets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
